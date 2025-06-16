@@ -1,23 +1,31 @@
 # 💻 API Backend - Trabalho Acadêmico  
-Este repositório contém o projeto final da disciplina de **Desenvolvimento Backend**, focado na construção de uma **API RESTful robusta, modular e segura** utilizando a stack Node.js com JavaScript e banco de dados relacional MySQL.
+Este repositório contém o projeto final da disciplina de **Desenvolvimento Backend**, focado na construção de uma **API RESTful robusta, modular e segura** utilizando a stack Node.js com JavaScript e banco de dados relacional MySQL com Sequelize.
 
 ---
 
 ## 📌 Objetivo  
-O projeto tem como finalidade oferecer um sistema completo de e-commerce com funcionalidades como autenticação de usuários, gerenciamento de produtos, categorias, pedidos, controle de estoque e transações. A aplicação foi construída com foco em segurança, modularidade e boas práticas de organização de código.
+O projeto tem como objetivo oferecer um sistema completo de e-commerce, com funcionalidades como:
+
+- Autenticação de usuários  
+- Gerenciamento de produtos e categorias  
+- Sistema de pedidos com controle de estoque  
+- Transações seguras e integridade de dados  
+
+A aplicação foi construída com foco em organização, segurança, modularidade e boas práticas de desenvolvimento.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas  
-- Node.js  
-- Express.js  
-- MySQL  
-- Sequelize  
-- bcryptjs  
-- jsonwebtoken (JWT)  
-- dotenv  
-- Swagger (swagger-jsdoc + swagger-ui-express)  
-- Nodemon (em desenvolvimento)
+
+- **Node.js** → Ambiente de execução JavaScript no servidor  
+- **Express.js** → Framework web para APIs RESTful  
+- **MySQL** → Banco de dados relacional  
+- **Sequelize** → ORM para manipulação dos dados  
+- **bcryptjs** → Criptografia de senhas  
+- **jsonwebtoken** → Autenticação com tokens JWT  
+- **dotenv** → Gerenciamento de variáveis de ambiente  
+- **Swagger** → Documentação da API (via swagger-jsdoc + swagger-ui-express)  
+- **Nodemon** → Reinício automático durante desenvolvimento  
 
 ---
 
@@ -26,38 +34,39 @@ O projeto tem como finalidade oferecer um sistema completo de e-commerce com fun
 ```text
 📦 PROJETO_JACKSON_BACKEND
 ├── 📁 src
-│   ├── 📁 config        → Configuração do banco de dados
+│   ├── 📁 config        → Configurações do banco de dados
 │   ├── 📁 controllers   → Lógica das rotas (CRUD e autenticação)
-│   ├── 📁 models        → Definições das entidades (ORM Sequelize)
-│   ├── 📁 middlewares   → Autenticação e validações
+│   ├── 📁 models        → Definições das entidades com Sequelize
+│   ├── 📁 middlewares   → Autenticação JWT e validações
 │   ├── 📁 routes        → Definições das rotas da API
-│   ├── 📁 docs          → Configuração da documentação Swagger
+│   ├── 📁 docs          → Documentação Swagger
 │   ├── 📁 utils         → Scripts auxiliares (ex: população do banco)
 │   ├── 📄 app.js        → Configuração do Express e middlewares globais
-│   └── 📄 server.js     → Inicialização do servidor e conexão com o banco
+│   └── 📄 server.js     → Inicialização do servidor e conexão com o DB
 ├── 📄 .env.example      → Exemplo de variáveis de ambiente
 ├── 📄 package.json      → Dependências e scripts
-└── 📄 package-lock.json → Gerenciamento de dependências
+└── 📄 package-lock.json → Versões travadas das dependências
 ```
 
 ---
 
 ## 🚀 Como Executar  
 
-Clone o repositório:
+### 1️⃣ Clone o repositório  
 
 ```bash
 git clone https://github.com/CristhianMazon/PROJETO_JACKSON_BACKEND.git
 cd PROJETO_JACKSON_BACKEND
 ```
 
-Instale as dependências:
+### 2️⃣ Instale as dependências  
 
 ```bash
 npm install
 ```
 
-Crie um arquivo `.env` com as configurações abaixo:
+### 3️⃣ Configure o ambiente  
+Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
 
 ```env
 PORT=3000
@@ -68,33 +77,63 @@ DB_PASSWORD=
 DB_HOST=localhost
 ```
 
-Crie o banco de dados `api_ecommerce_db` no MySQL Workbench (ou similar).  
-Em seguida, execute o script de população:
+> ⚠️ Ajuste os valores conforme suas credenciais do MySQL.
+
+---
+
+### 4️⃣ Crie o banco de dados  
+No MySQL Workbench ou ferramenta similar:
+
+- Crie um schema com o nome definido em `DB_NAME` (ex: `api_ecommerce_db`)  
+- Rode o comando abaixo para popular o banco:
 
 ```bash
 npm run populate
 ```
 
-Inicie o servidor da API:
+Você verá a mensagem: `Banco populado com sucesso!`
+
+---
+
+### 5️⃣ Inicie o servidor  
 
 ```bash
 npm run dev
 ```
 
+O servidor estará rodando em `http://localhost:3000`.
+
+---
+
+## 🧪 Testes e Documentação  
+
+### 🔎 Swagger UI  
+Acesse:  
+[http://localhost:3000/api-docs](http://localhost:3000/api-docs)  
+
+### 🧪 Usuário de Teste  
+
+- **Email:** `cris@example.com`  
+- **Senha:** `123456`  
+
+> Use esse login em `/api/auth/login` para obter um token JWT.  
+Depois, clique em **"Authorize"** na interface Swagger e insira o token no formato:  
+```text
+Bearer SEU_TOKEN_AQUI
+```
+
 ---
 
 ## 📚 Observações  
-- Documentação interativa disponível em: [http://localhost:3000/api-docs](http://localhost:3000/api-docs)  
-- Usuário de teste:  
-  - **Email:** `cris@example.com`  
-  - **Senha:** `123456`  
-- Operações críticas usam transações SQL com Sequelize  
-- Autenticação segura com JWT  
-- Senhas criptografadas com bcryptjs  
-- Comentários no código explicam toda a lógica dos endpoints
+
+- Toda autenticação é baseada em **JWT**  
+- Senhas são protegidas com **bcryptjs**  
+- Relacionamentos N:N são tratados com transações para garantir integridade  
+- Comentários no código explicam a lógica dos endpoints  
+- Swagger detalha todas as rotas, parâmetros e respostas  
 
 ---
 
 ## 🧑‍💻 Autor  
 **Cristhian Silveira Mazon**  
-📧 cristhian.mazon@gmail.com
+📧 [cristhian.mazon@gmail.com](mailto:cristhian.mazon@gmail.com)

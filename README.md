@@ -154,4 +154,4 @@ Bearer SEU_TOKEN_AQUI
 ## 🧑‍💻 Autor
 
 **Cristhian Silveira Mazon**  
-📧 [cristhian.mazon@gmail.com](mailto:cristhian.mazon@gmail.com)
+📧 [cristhian.s.mazon@gmail.com](mailto:cristhian.s.mazon@gmail.com)

@@ -65,11 +65,12 @@ exports.deleteAuthenticatedUser = async (req, res) => {
             return res.status(404).json({ message: 'Usuário não encontrado.' });
         }
 
-        // TODO: Considerar o que acontece com os pedidos do usuário ao deletar a conta.
-        // Se a integridade referencial estiver configurada para CASCADE (no DB ou nos modelos),
-        // os pedidos do usuário podem ser deletados automaticamente.
-        // Caso contrário, você pode precisar deletar os pedidos primeiro ou impedir a exclusão
-        // se houver pedidos ativos, dependendo da regra de negócio.
+        // NOTA sobre exclusão de usuários:
+        // Com a configuração 'onDelete: CASCADE' na associação User.hasMany(Order) em Order.js,
+        // ao deletar um usuário, todos os pedidos associados a ele serão automaticamente deletados.
+        // Além disso, devido ao 'onDelete: CASCADE' nas associações de OrderProduct, as entradas
+        // na tabela OrderProduct relacionadas a esses pedidos também serão deletadas.
+        // Isso garante a integridade referencial completa ao deletar um usuário.
 
         await user.destroy();
         res.status(204).send(); // 204 No Content para deleção bem-sucedida

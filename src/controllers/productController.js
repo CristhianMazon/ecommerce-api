@@ -3,17 +3,20 @@ const Category = require('../models/Category');
 
 exports.createProduct = async (req, res) => {
     try {
-        const { name, price, categoryId, stock } = req.body; // Adicionado 'stock'
+        const { name, description, price, categoryId, stock } = req.body; // Adicionado 'description'
 
-        // Validação básica
+        // Validação básica: nome, preço, categoria e estoque são obrigatórios. Estoque não pode ser negativo.
         if (!name || !price || !categoryId || stock === undefined || stock < 0) {
             return res.status(400).json({ message: 'Nome, preço, categoria e estoque são obrigatórios. Estoque não pode ser negativo.' });
         }
 
         const category = await Category.findByPk(categoryId);
-        if (!category) return res.status(400).json({ message: 'Categoria não encontrada.' });
+        if (!category) {
+            return res.status(400).json({ message: 'Categoria não encontrada.' });
+        }
 
-        const product = await Product.create({ name, price, categoryId, stock }); // Passa 'stock'
+        // Cria o produto com os dados fornecidos, incluindo a descrição e o estoque.
+        const product = await Product.create({ name, description, price, categoryId, stock });
         res.status(201).json(product);
     } catch (error) {
         console.error('Erro ao criar produto:', error);
@@ -23,6 +26,7 @@ exports.createProduct = async (req, res) => {
 
 exports.getAllProducts = async (req, res) => {
     try {
+        // Inclui a categoria associada a cada produto
         const products = await Product.findAll({ include: Category });
         res.json(products);
     } catch (error) {
@@ -34,9 +38,12 @@ exports.getAllProducts = async (req, res) => {
 exports.getProductById = async (req, res) => {
     try {
         const { id } = req.params;
+        // Busca um produto pelo ID e inclui sua categoria
         const product = await Product.findByPk(id, { include: Category });
 
-        if (!product) return res.status(404).json({ message: 'Produto não encontrado.' });
+        if (!product) {
+            return res.status(404).json({ message: 'Produto não encontrado.' });
+        }
 
         res.json(product);
     } catch (error) {
@@ -48,26 +55,33 @@ exports.getProductById = async (req, res) => {
 exports.updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, price, categoryId, stock } = req.body; // Adicionado 'stock'
+        const { name, description, price, categoryId, stock } = req.body; // Adicionado 'description'
 
         const product = await Product.findByPk(id);
-        if (!product) return res.status(404).json({ message: 'Produto não encontrado.' });
-
-        if (categoryId) {
-            const category = await Category.findByPk(categoryId);
-            if (!category) return res.status(400).json({ message: 'Categoria inválida.' });
+        if (!product) {
+            return res.status(404).json({ message: 'Produto não encontrado.' });
         }
 
-        // Validação de estoque para atualização
+        // Verifica se a nova categoria existe, se categoryId foi fornecido
+        if (categoryId) {
+            const category = await Category.findByPk(categoryId);
+            if (!category) {
+                return res.status(400).json({ message: 'Categoria inválida.' });
+            }
+        }
+
+        // Validação de estoque para atualização: não pode ser negativo
         if (stock !== undefined && stock < 0) {
             return res.status(400).json({ message: 'Estoque não pode ser negativo.' });
         }
 
+        // Atualiza apenas os campos que foram fornecidos na requisição
         await product.update({
-            name: name || product.name,
-            price: price || product.price,
-            categoryId: categoryId || product.categoryId,
-            stock: stock !== undefined ? stock : product.stock // Atualiza estoque se fornecido
+            name: name !== undefined ? name : product.name,
+            description: description !== undefined ? description : product.description, // Atualiza descrição
+            price: price !== undefined ? price : product.price,
+            categoryId: categoryId !== undefined ? categoryId : product.categoryId,
+            stock: stock !== undefined ? stock : product.stock
         });
         res.json(product);
     } catch (error) {
@@ -80,16 +94,19 @@ exports.deleteProduct = async (req, res) => {
     try {
         const { id } = req.params;
         const product = await Product.findByPk(id);
-        if (!product) return res.status(404).json({ message: 'Produto não encontrado.' });
+        if (!product) {
+            return res.status(404).json({ message: 'Produto não encontrado.' });
+        }
 
-        // TODO: Considerar o que acontece com produtos em pedidos existentes.
-        // Se a integridade referencial estiver configurada para RESTRICT ou NO ACTION,
-        // você pode precisar impedir a exclusão se o produto estiver em algum pedido.
-        // Se for CASCADE, as entradas em OrderProduct seriam deletadas.
-        // No seu caso, o relacionamento N:N via OrderProduct não impede a exclusão direta do produto.
+        // NOTA sobre exclusão de produtos:
+        // Com a configuração 'onDelete: CASCADE' na associação belongsToMany em OrderProduct.js,
+        // ao deletar um produto, todas as entradas na tabela OrderProduct que se referem a este produto
+        // serão automaticamente deletadas pelo banco de dados. Isso mantém a integridade referencial
+        // sem a necessidade de lógica manual aqui. Os pedidos em si (tabela Order) não são afetados,
+        // apenas suas associações com o produto deletado.
 
         await product.destroy();
-        res.status(204).send();
+        res.status(204).send(); // 204 No Content para deleção bem-sucedida
     } catch (error) {
         console.error('Erro ao deletar produto:', error);
         res.status(500).json({ message: 'Erro ao deletar produto', error: error.message });

@@ -19,7 +19,10 @@ const OrderProduct = sequelize.define('OrderProduct', {
   }
 });
 
-Order.belongsToMany(Product, { through: OrderProduct, foreignKey: 'orderId' });
-Product.belongsToMany(Order, { through: OrderProduct, foreignKey: 'productId' });
+// Relacionamento N:N entre Pedido e Produto através de OrderProduct
+// onDelete 'CASCADE': Se um Pedido for deletado, as entradas correspondentes em OrderProduct serão deletadas.
+Order.belongsToMany(Product, { through: OrderProduct, foreignKey: 'orderId', onDelete: 'CASCADE' });
+// onDelete 'CASCADE': Se um Produto for deletado, as entradas correspondentes em OrderProduct serão deletadas.
+Product.belongsToMany(Order, { through: OrderProduct, foreignKey: 'productId', onDelete: 'CASCADE' });
 
 module.exports = OrderProduct;

@@ -1,147 +1,157 @@
-💻 API Backend - Trabalho Acadêmico
-Este repositório contém o projeto final da disciplina de Desenvolvimento Backend, focado na construção de uma API RESTful robusta, modular e segura. A aplicação utiliza a stack Node.js com JavaScript, integrada a um banco de dados relacional MySQL, com mapeamento de dados feito por meio do Sequelize.
+# 💻 API Backend - Trabalho Acadêmico
 
-📌 Objetivo
+Este repositório contém o projeto final da disciplina de **Desenvolvimento Backend**, focado na construção de uma **API RESTful robusta, modular e segura**.  
+A aplicação utiliza a stack **Node.js com JavaScript**, integrada a um banco de dados relacional **MySQL**, com mapeamento de dados feito por meio do **Sequelize**.
+
+---
+
+## 📌 Objetivo
+
 O projeto tem como finalidade demonstrar a aplicação do padrão MVC em uma aplicação real de backend, com foco em:
 
-Autenticação com JWT e criptografia de senhas (bcryptjs).
+- 🔐 Autenticação com JWT e criptografia de senhas (bcryptjs)  
+- 📦 Gestão completa de entidades (Usuários, Produtos, Categorias, Pedidos)  
+- 🔄 Relacionamentos complexos entre tabelas (1:N, N:N)  
+- 🧾 Transações de banco de dados para garantir integridade (ex: controle de estoque em pedidos)  
+- 📘 Documentação interativa da API com Swagger  
+- 🧱 Organização de código, modularidade e segurança  
 
-Gestão completa de entidades (Usuários, Produtos, Categorias, Pedidos).
+---
 
-Relacionamentos complexos entre tabelas (1:N, N:N).
+## 🛠️ Tecnologias Utilizadas
 
-Transações de banco de dados para garantir integridade (ex: controle de estoque em pedidos).
+- **Node.js** → Ambiente de execução JavaScript no servidor  
+- **Express.js** → Framework web para APIs RESTful  
+- **MySQL** → Banco de dados relacional  
+- **Sequelize** → ORM para manipulação de dados  
+- **bcryptjs** → Criptografia de senhas  
+- **jsonwebtoken** → Autenticação com JWT  
+- **dotenv** → Gerenciamento de variáveis de ambiente  
+- **Swagger** → Documentação da API (swagger-jsdoc + swagger-ui-express)  
+- **Nodemon** → Reinício automático em desenvolvimento  
 
-Documentação interativa da API com Swagger.
+---
 
-Organização de código, modularidade e segurança.
+## 📁 Estrutura de Diretórios
 
-🛠️ Tecnologias Utilizadas
-Node.js: Ambiente de execução de JavaScript no servidor.
-
-Express.js: Framework web para APIs RESTful.
-
-MySQL: Banco de dados relacional.
-
-Sequelize: ORM (Object-Relational Mapper) para abstração e manipulação de dados.
-
-bcryptjs: Biblioteca para criptografia (hash) de senhas.
-
-jsonwebtoken: Implementação de JSON Web Tokens (JWT) para autenticação.
-
-dotenv: Gerenciamento de variáveis de ambiente.
-
-Swagger (swagger-jsdoc, swagger-ui-express): Ferramenta para gerar e visualizar documentação interativa da API.
-
-Nodemon: Ferramenta para reinicialização automática do servidor durante o desenvolvimento.
-
-📁 Estrutura de Diretórios
+```text
 📦 PROJETO_JACKSON_BACKEND
- ├── 📁 src
- │   ├── 📁 config/        → Configurações da aplicação (ex: conexão com o banco de dados)
- │   ├── 📁 controllers/   → Lógica de controle para cada endpoint (processamento de requisições)
- │   ├── 📁 models/        → Definição das entidades do banco de dados (tabelas e associações Sequelize)
- │   ├── 📁 middlewares/   → Funções que interceptam requisições (ex: autenticação JWT, validações)
- │   ├── 📁 routes/        → Definição das rotas da API, organizadas por módulo (ex: auth, products)
- │   ├── 📁 docs/          → Configuração e metadados para a documentação Swagger
- │   ├── 📁 utils/         → Funções utilitárias (ex: script de população do banco de dados)
- │   ├── 📄 app.js         → Configuração principal do Express e middlewares globais da aplicação
- │   └── 📄 server.js      → Ponto de entrada da aplicação, responsável por iniciar o servidor
- ├── 📄 .env.example       → Exemplo de arquivo para as variáveis de ambiente (nunca versionar o .env real!)
- ├── 📄 package.json       → Define as dependências do projeto e scripts de execução
- └── 📄 package-lock.json  → Garante a instalação de versões exatas das dependências
+├── 📁 src
+│   ├── 📁 config/        → Conexão com banco de dados
+│   ├── 📁 controllers/   → Lógica dos endpoints
+│   ├── 📁 models/        → Entidades e relacionamentos Sequelize
+│   ├── 📁 middlewares/   → Autenticação, validações, etc
+│   ├── 📁 routes/        → Rotas organizadas por entidade
+│   ├── 📁 docs/          → Configuração Swagger
+│   ├── 📁 utils/         → Scripts auxiliares (populate)
+│   ├── 📄 app.js         → Configuração geral do Express
+│   └── 📄 server.js      → Inicialização da aplicação
+├── 📄 .env.example       → Exemplo de variáveis de ambiente
+├── 📄 package.json       → Dependências e scripts
+└── 📄 package-lock.json  → Versões travadas das dependências
+```
 
-🚀 Como Executar o Projeto
-Pré-requisitos
-Certifique-se de ter instalado em sua máquina:
+---
 
-Node.js (versão 14 ou superior)
+## 🚀 Como Executar o Projeto
 
-MySQL Server (Recomendado o uso de XAMPP para gerenciar o MySQL localmente)
+### ✅ Pré-requisitos
 
-MySQL Workbench (Opcional, mas útil para gerenciar o banco de dados visualmente)
+- Node.js (v14 ou superior)  
+- MySQL Server (recomenda-se o XAMPP)  
+- MySQL Workbench (opcional)
 
-Configuração e Instalação
-Clone o Repositório:
+---
 
+### 🧰 Instalação e Configuração
+
+1. **Clone o repositório:**
+
+```bash
 git clone https://github.com/CristhianMazon/PROJETO_JACKSON_BACKEND.git
 cd PROJETO_JACKSON_BACKEND
+```
 
-Instale as Dependências:
+2. **Instale as dependências:**
 
+```bash
 npm install
+```
 
-Configure o Ambiente (.env):
+3. **Crie o arquivo `.env`:**
 
-Crie um arquivo chamado .env na raiz do projeto (na mesma pasta do package.json).
-
-Preencha-o com suas credenciais do MySQL e uma chave JWT secreta. Exemplo:
-
+```env
 PORT=3000
 JWT_SECRET=sua_chave_secreta_jwt_bem_longa_e_aleatoria
 DB_NAME=api_ecommerce_db
-DB_USER=root # ou seu usuário MySQL (ex: api_user)
-DB_PASSWORD= # sua senha MySQL (vazia se o root não tiver senha, ou a que configurou)
+DB_USER=root
+DB_PASSWORD=
 DB_HOST=localhost
+```
 
-Importante: Ajuste DB_USER e DB_PASSWORD conforme as credenciais do seu MySQL Server.
+> 🔒 Altere `DB_USER` e `DB_PASSWORD` de acordo com suas credenciais MySQL.
 
-Inicie o Servidor MySQL (via XAMPP):
+4. **Inicie o MySQL via XAMPP:**
 
-Abra o Painel de Controle do XAMPP.
+- Abra o painel XAMPP  
+- Clique em “Start” no MySQL  
 
-Clique em "Start" ao lado de MySQL. Certifique-se de que ele esteja rodando (status verde).
+5. **Crie o banco de dados:**
 
-Crie o Banco de Dados (Esquema):
+- Abra o MySQL Workbench  
+- Crie o schema com o mesmo nome do `.env` (ex: `api_ecommerce_db`)
 
-Abra o MySQL Workbench.
+6. **Popule o banco com dados iniciais:**
 
-Conecte-se à sua instância local do MySQL.
-
-No painel Navigator, na seção SCHEMAS, clique com o botão direito e selecione "Create Schema...".
-
-No campo "Schema Name", digite o nome exato que você configurou em DB_NAME no seu .env (ex: api_ecommerce_db).
-
-Clique em "Apply" (duas vezes) e depois em "Finish".
-
-Popule o Banco de Dados com Dados Iniciais:
-
-Execute este script para criar todas as tabelas e inserir alguns dados de exemplo (um usuário, categorias, produtos e um pedido):
-
+```bash
 npm run populate
+```
 
-Você verá a mensagem "Banco populado com sucesso!". (Se tiver erros de conexão ou acesso, revise os passos 3, 4 e 5).
+> Você verá a mensagem `Banco populado com sucesso!`
 
-Inicie o Servidor da API:
+7. **Execute a aplicação:**
 
+```bash
 npm run dev
+```
 
-O servidor estará rodando na porta especificada no seu .env (padrão: 3000).
+---
 
-Testando a API
-Com o servidor rodando, você pode testar a API de forma interativa:
+## 🧪 Testando a API
 
-Documentação Interativa com Swagger UI:
+### 🔍 Documentação Interativa (Swagger)
 
-Acesse no seu navegador: http://localhost:3000/api-docs
+Acesse:  
+[http://localhost:3000/api-docs](http://localhost:3000/api-docs)
 
-Para rotas protegidas: Faça login via POST /api/auth/login (email: cris@example.com, senha: 123456) para obter um token JWT. Em seguida, clique no botão verde "Authorize" no canto superior direito e insira o token no formato Bearer SEU_TOKEN_AQUI.
+### 🔐 Login de Teste
 
-Postman (ou ferramenta similar):
+- **Email:** `cris@example.com`  
+- **Senha:** `123456`  
 
-Você pode usar o Postman para criar e enviar requisições para os endpoints da API. Lembre-se de adicionar o cabeçalho Authorization: Bearer SEU_TOKEN_AQUI para rotas protegidas.
+Use esse login no endpoint `/api/auth/login` para obter um token.  
+Depois, clique em “Authorize” na interface Swagger e insira o token:
 
-📚 Observações
-O projeto está finalizado e todas as funcionalidades principais e requisitos do trabalho foram implementados.
+```
+Bearer SEU_TOKEN_AQUI
+```
 
-Segurança: Senhas criptografadas (bcryptjs), autenticação stateless via JWT, e proteção de rotas por middlewares.
+> Ou utilize o Postman com o cabeçalho:  
+`Authorization: Bearer SEU_TOKEN_AQUI`
 
-Integridade de Dados: Operações complexas (ex: criação/cancelamento de pedidos) utilizam transações de banco de dados para garantir consistência e controle de estoque.
+---
 
-Integridade Referencial: As associações do Sequelize configuram a integridade no nível do banco de dados (usando onDelete).
+## 📚 Observações
 
-Organização: O código segue um padrão modular com separação clara de responsabilidades entre controllers, models, routes e middlewares.
+- 🔐 Autenticação JWT e senhas protegidas com bcryptjs  
+- 🔁 Transações em pedidos garantem controle de estoque  
+- 🧱 Integridade referencial definida com `onDelete` no Sequelize  
+- 📘 Swagger documenta todos os endpoints  
+- 🧹 Código limpo, modular, seguindo o padrão MVC  
 
-🧑‍💻 Autor
-Cristhian Silveira Mazon
-📧 cristhian.mazon@gmail.com
+---
+
+## 🧑‍💻 Autor
+
+**Cristhian Silveira Mazon**  
+📧 [cristhian.mazon@gmail.com](mailto:cristhian.mazon@gmail.com)

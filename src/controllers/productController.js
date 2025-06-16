@@ -98,13 +98,6 @@ exports.deleteProduct = async (req, res) => {
             return res.status(404).json({ message: 'Produto não encontrado.' });
         }
 
-        // NOTA sobre exclusão de produtos:
-        // Com a configuração 'onDelete: CASCADE' na associação belongsToMany em OrderProduct.js,
-        // ao deletar um produto, todas as entradas na tabela OrderProduct que se referem a este produto
-        // serão automaticamente deletadas pelo banco de dados. Isso mantém a integridade referencial
-        // sem a necessidade de lógica manual aqui. Os pedidos em si (tabela Order) não são afetados,
-        // apenas suas associações com o produto deletado.
-
         await product.destroy();
         res.status(204).send(); // 204 No Content para deleção bem-sucedida
     } catch (error) {

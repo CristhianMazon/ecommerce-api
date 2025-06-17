@@ -63,7 +63,7 @@ O projeto tem como finalidade demonstrar a aplicação do padrão MVC em uma apl
 │   │   └── 📄 swagger.js
 │   ├── 📁 utils/             → Scripts auxiliares (ex: populate)
 │   │   └── 📄 populate.js
-│   ├── 📄 app.js             → Configuração principal do Express
+│   ├── 📄 app.js             → Configuração principal usada no Express
 │   └── 📄 server.js          → Inicialização da aplicação
 ├── 📄 .env.example           → Exemplo de variáveis de ambiente
 ├── 📄 package.json           → Dependências e scripts

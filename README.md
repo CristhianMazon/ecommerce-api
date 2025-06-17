@@ -35,7 +35,7 @@ Este projeto demonstra, na prática, o uso do padrão **MVC** com foco em:
 ## 📁 Estrutura do Projeto
 
 ```text
-📦 PROJETO_JACKSON_BACKEND
+📦 ecommerce-api
 ├── 📁 src
 │   ├── 📁 config/            → Conexão com banco de dados
 │   │   └── database.js
@@ -87,8 +87,8 @@ Este projeto demonstra, na prática, o uso do padrão **MVC** com foco em:
 1. **Clone o repositório:**
 
 ```bash
-git clone https://github.com/CristhianMazon/PROJETO_JACKSON_BACKEND.git
-cd PROJETO_JACKSON_BACKEND
+git clone https://github.com/CristhianMazon/ecommerce-api.git
+cd ecommerce-api
 ```
 
 2. **Instale as dependências:**

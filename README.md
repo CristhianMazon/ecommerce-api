@@ -1,4 +1,4 @@
-# 💻 API Backend - Trabalho Acadêmico
+# 💻 API Backend — Trabalho Acadêmico
 
 Este repositório contém o projeto final da disciplina de **Desenvolvimento Backend**, focado na construção de uma **API RESTful robusta, modular e segura**.  
 A aplicação utiliza a stack **Node.js com JavaScript**, integrada a um banco de dados relacional **MySQL**, com mapeamento de dados feito por meio do **Sequelize**.
@@ -7,14 +7,14 @@ A aplicação utiliza a stack **Node.js com JavaScript**, integrada a um banco d
 
 ## 📌 Objetivo
 
-O projeto tem como finalidade demonstrar a aplicação do padrão MVC em uma aplicação real de backend, com foco em:
+Este projeto demonstra, na prática, o uso do padrão **MVC** com foco em:
 
 - 🔐 Autenticação com JWT e criptografia de senhas (bcryptjs)  
-- 📦 Gestão completa de entidades (Usuários, Produtos, Categorias, Pedidos)  
+- 📦 Gestão completa de entidades: **Usuários, Produtos, Categorias e Pedidos**  
 - 🔄 Relacionamentos complexos entre tabelas (1:N, N:N)  
-- 🧾 Transações de banco de dados para garantir integridade (ex: controle de estoque em pedidos)  
-- 📘 Documentação interativa da API com Swagger  
-- 🧱 Organização de código, modularidade e segurança  
+- 🧾 Transações de banco de dados (ex: controle de estoque)  
+- 📘 Documentação interativa da API com **Swagger**  
+- 🧱 Código modular, seguro e de fácil manutenção
 
 ---
 
@@ -25,49 +25,49 @@ O projeto tem como finalidade demonstrar a aplicação do padrão MVC em uma apl
 - **MySQL** → Banco de dados relacional  
 - **Sequelize** → ORM para manipulação de dados  
 - **bcryptjs** → Criptografia de senhas  
-- **jsonwebtoken** → Autenticação com JWT  
+- **jsonwebtoken** → Autenticação via JWT  
 - **dotenv** → Gerenciamento de variáveis de ambiente  
-- **Swagger** → Documentação da API (swagger-jsdoc + swagger-ui-express)  
-- **Nodemon** → Reinício automático em desenvolvimento  
+- **Swagger** → Documentação interativa da API  
+- **Nodemon** → Reinício automático em desenvolvimento
 
 ---
 
-## 📦 Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
-```bash
+```text
 📦 PROJETO_JACKSON_BACKEND
 ├── 📁 src
 │   ├── 📁 config/            → Conexão com banco de dados
-│   │   └── 📄 database.js
+│   │   └── database.js
 │   ├── 📁 controllers/       → Lógica dos endpoints
-│   │   ├── 📄 authController.js
-│   │   ├── 📄 categoryController.js
-│   │   ├── 📄 orderController.js
-│   │   ├── 📄 productController.js
-│   │   └── 📄 userController.js
-│   ├── 📁 models/            → Entidades e relacionamentos Sequelize
-│   │   ├── 📄 Category.js
-│   │   ├── 📄 Order.js
-│   │   ├── 📄 OrderProduct.js
-│   │   ├── 📄 Product.js
-│   │   └── 📄 User.js
-│   ├── 📁 middlewares/       → Autenticação, validações, etc
-│   │   └── 📄 auth.js
-│   ├── 📁 routes/            → Rotas organizadas por entidade
-│   │   ├── 📄 authRoutes.js
-│   │   ├── 📄 categoryRoutes.js
-│   │   ├── 📄 orderRoutes.js
-│   │   ├── 📄 productRoutes.js
-│   │   └── 📄 userRoutes.js
+│   │   ├── authController.js
+│   │   ├── categoryController.js
+│   │   ├── orderController.js
+│   │   ├── productController.js
+│   │   └── userController.js
+│   ├── 📁 models/            → Definição das entidades e relacionamentos
+│   │   ├── Category.js
+│   │   ├── Order.js
+│   │   ├── OrderProduct.js
+│   │   ├── Product.js
+│   │   └── User.js
+│   ├── 📁 middlewares/       → Autenticação e validações
+│   │   └── auth.js
+│   ├── 📁 routes/            → Endpoints organizados por entidade
+│   │   ├── authRoutes.js
+│   │   ├── categoryRoutes.js
+│   │   ├── orderRoutes.js
+│   │   ├── productRoutes.js
+│   │   └── userRoutes.js
 │   ├── 📁 docs/              → Configuração Swagger
-│   │   └── 📄 swagger.js
-│   ├── 📁 utils/             → Scripts auxiliares (ex: populate)
-│   │   └── 📄 populate.js
-│   ├── 📄 app.js             → Configuração principal usada no Express
-│   └── 📄 server.js          → Inicialização da aplicação
-├── 📄 .env.example           → Exemplo de variáveis de ambiente
-├── 📄 package.json           → Dependências e scripts
-└── 📄 package-lock.json      → Versões travadas das dependências
+│   │   └── swagger.js
+│   ├── 📁 utils/             → Scripts auxiliares
+│   │   └── populate.js
+│   ├── app.js                → Configuração principal do Express
+│   └── server.js             → Inicialização da aplicação
+├── .env.example              → Exemplo de variáveis de ambiente
+├── package.json              → Dependências e scripts
+└── package-lock.json         → Controle de versões
 ```
 
 ---
@@ -97,7 +97,9 @@ cd PROJETO_JACKSON_BACKEND
 npm install
 ```
 
-3. **Crie o arquivo `.env`:**
+3. **Configure o ambiente:**
+
+Crie o arquivo `.env` na raiz com base no exemplo abaixo:
 
 ```env
 PORT=3000
@@ -108,17 +110,17 @@ DB_PASSWORD=
 DB_HOST=localhost
 ```
 
-> 🔒 Altere `DB_USER` e `DB_PASSWORD` de acordo com suas credenciais MySQL.
+> 🔒 Altere `DB_USER` e `DB_PASSWORD` conforme suas credenciais MySQL.
 
-4. **Inicie o MySQL via XAMPP:**
+4. **Inicie o MySQL:**
 
-- Abra o painel XAMPP  
-- Clique em “Start” no MySQL  
+- Abra o XAMPP  
+- Clique em “Start” no módulo MySQL
 
 5. **Crie o banco de dados:**
 
-- Abra o MySQL Workbench  
-- Crie o schema com o mesmo nome do `.env` (ex: `api_ecommerce_db`)
+- Acesse o MySQL Workbench  
+- Crie um schema com o nome definido no `.env` (ex: `api_ecommerce_db`)
 
 6. **Popule o banco com dados iniciais:**
 
@@ -126,7 +128,7 @@ DB_HOST=localhost
 npm run populate
 ```
 
-> Você verá a mensagem `Banco populado com sucesso!`
+> Mensagem esperada: `Banco populado com sucesso!`
 
 7. **Execute a aplicação:**
 
@@ -138,39 +140,45 @@ npm run dev
 
 ## 🧪 Testando a API
 
-### 🔍 Documentação Interativa (Swagger)
+### 📘 Documentação Interativa
 
-Acesse:  
+Acesse via navegador:  
 [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+
+---
 
 ### 🔐 Login de Teste
 
-- **Email:** `cris@example.com`  
-- **Senha:** `123456`  
+Use as credenciais abaixo no endpoint `/api/auth/login`:
 
-Use esse login no endpoint `/api/auth/login` para obter um token.  
-Depois, clique em “Authorize” na interface Swagger e insira o token:
+- **Email:** `cris@example.com`  
+- **Senha:** `123456`
+
+Copie o token de acesso retornado e clique em "Authorize" na interface Swagger para inserir:
 
 ```
 Bearer SEU_TOKEN_AQUI
 ```
 
-> Ou utilize o Postman com o cabeçalho:  
-`Authorization: Bearer SEU_TOKEN_AQUI`
+Ou utilize no Postman:
+
+```
+Authorization: Bearer SEU_TOKEN_AQUI
+```
 
 ---
 
 ## 📚 Observações
 
-- 🔐 Autenticação JWT e senhas protegidas com bcryptjs  
-- 🔁 Transações em pedidos garantem controle de estoque  
-- 🧱 Integridade referencial definida com `onDelete` no Sequelize  
-- 📘 Swagger documenta todos os endpoints  
-- 🧹 Código limpo, modular, seguindo o padrão MVC  
+- 🔐 JWT e senhas protegidas com bcryptjs  
+- 🔁 Pedidos utilizam transações para garantir controle de estoque  
+- 🔗 Relacionamentos bem definidos com integridade referencial no Sequelize  
+- 📘 Swagger cobre todos os endpoints da API  
+- 🧹 Código modular e organizado segundo o padrão MVC
 
 ---
 
-## 🧑‍💻 Autor
+## 👨‍💻 Autor
 
 **Cristhian Silveira Mazon**  
 📧 [cristhian.s.mazon@gmail.com](mailto:cristhian.s.mazon@gmail.com)

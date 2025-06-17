@@ -32,42 +32,42 @@ O projeto tem como finalidade demonstrar a aplicação do padrão MVC em uma apl
 
 ---
 
-## 📁 Estrutura de Diretórios
+## 📦 Estrutura do Projeto
 
-```text
+```bash
 📦 PROJETO_JACKSON_BACKEND
 ├── 📁 src
-│   ├── 📁 config/        → Conexão com banco de dados
-|   |   └── 📄 database.js
-│   ├── 📁 controllers/   → Lógica dos endpoints
-|   |   └── 📄 authController.js
-|   |   └── 📄 categoryController.js
-|   |   └── 📄 orderController.js
-|   |   └── 📄 productController.js
-|   |   └── 📄 userController.js
-│   ├── 📁 models/        → Entidades e relacionamentos Sequelize
-|   |   └── 📄 Category.js
-|   |   └── 📄 Order.js
-|   |   └── 📄 OrderProduct.js
-|   |   └── 📄 Product.js
-|   |   └── 📄 User.js
-│   ├── 📁 middlewares/   → Autenticação, validações, etc
-|   |   └── 📄 auth.js
-│   ├── 📁 routes/        → Rotas organizadas por entidade
-|   |   └── 📄 authRoutes.js
-|   |   └── 📄 categoryRoutes.js
-|   |   └── 📄 orderRoutes.js
-|   |   └── 📄 productRoutes.js
-|   |   └── 📄 userRoutes.js
-│   ├── 📁 docs/          → Configuração Swagger
-|   |   └── 📄 swagger.js
-│   ├── 📁 utils/         → Scripts auxiliares (populate)
-|   |   └── 📄 populate.js
-│   ├── 📄 app.js         → Configuração geral do Express
-│   └── 📄 server.js      → Inicialização da aplicação
-├── 📄 .env.example       → Exemplo de variáveis de ambiente
-├── 📄 package.json       → Dependências e scripts
-└── 📄 package-lock.json  → Versões travadas das dependências
+│   ├── 📁 config/            → Conexão com banco de dados
+│   │   └── 📄 database.js
+│   ├── 📁 controllers/       → Lógica dos endpoints
+│   │   ├── 📄 authController.js
+│   │   ├── 📄 categoryController.js
+│   │   ├── 📄 orderController.js
+│   │   ├── 📄 productController.js
+│   │   └── 📄 userController.js
+│   ├── 📁 models/            → Entidades e relacionamentos Sequelize
+│   │   ├── 📄 Category.js
+│   │   ├── 📄 Order.js
+│   │   ├── 📄 OrderProduct.js
+│   │   ├── 📄 Product.js
+│   │   └── 📄 User.js
+│   ├── 📁 middlewares/       → Autenticação, validações, etc
+│   │   └── 📄 auth.js
+│   ├── 📁 routes/            → Rotas organizadas por entidade
+│   │   ├── 📄 authRoutes.js
+│   │   ├── 📄 categoryRoutes.js
+│   │   ├── 📄 orderRoutes.js
+│   │   ├── 📄 productRoutes.js
+│   │   └── 📄 userRoutes.js
+│   ├── 📁 docs/              → Configuração Swagger
+│   │   └── 📄 swagger.js
+│   ├── 📁 utils/             → Scripts auxiliares (ex: populate)
+│   │   └── 📄 populate.js
+│   ├── 📄 app.js             → Configuração principal do Express
+│   └── 📄 server.js          → Inicialização da aplicação
+├── 📄 .env.example           → Exemplo de variáveis de ambiente
+├── 📄 package.json           → Dependências e scripts
+└── 📄 package-lock.json      → Versões travadas das dependências
 ```
 
 ---

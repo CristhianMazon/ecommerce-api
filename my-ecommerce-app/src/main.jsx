@@ -1,14 +1,17 @@
 // src/main.jsx
-import React from 'react'; // Make sure React is imported
-import ReactDOM from 'react-dom/client'; // Use ReactDOM for createRoot
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
-import { AuthProvider } from './context/AuthContext'; // Import AuthProvider
+import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext'; // Importa o CartProvider
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider> {/* THIS IS THE CRUCIAL WRAPPER */}
-      <App />
+    <AuthProvider>
+      <CartProvider> {/* VERIFIQUE SE ESTÁ AQUI */}
+        <App />
+      </CartProvider>
     </AuthProvider>
   </React.StrictMode>,
 );

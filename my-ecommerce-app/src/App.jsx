@@ -6,6 +6,9 @@ import Login from './components/Login'; // Importa o componente Login
 import Register from './components/Register'; // Importa o componente Register
 import ProductList from './components/ProductList'; // Importa o componente ProductList
 import UserProfile from './components/UserProfile'; // Importa o componente UserProfile
+import OrderList from './components/OrderList'; // Importa o componente OrderList
+import CartView from './components/CartView'; // Importa o componente CartView (para o carrinho de compras)
+
 
 function App() {
   // Desestrutura o token, a função logout e o estado de carregamento da autenticação do hook useAuth.
@@ -19,7 +22,7 @@ function App() {
   const [showLogin, setShowLogin] = useState(true);
 
   // Novo estado para controlar a seção ativa da aplicação para usuários logados.
-  // Pode ser 'products', 'profile', 'orders'. Inicia mostrando 'products'.
+  // Pode ser 'products', 'profile', 'orders', 'cart'. Inicia mostrando 'products'.
   const [activeSection, setActiveSection] = useState('products');
 
   // Se o estado de carregamento da autenticação for verdadeiro, exibe uma mensagem de carregamento.
@@ -127,6 +130,21 @@ function App() {
               >
                 Meus Pedidos
               </button>
+              {/* NOVO BOTÃO: Carrinho */}
+              <button
+                onClick={() => setActiveSection('cart')} // Define a seção ativa como 'cart'
+                style={{
+                  padding: '10px 20px',
+                  backgroundColor: activeSection === 'cart' ? '#5a6268' : '#6c757d',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                  fontSize: '16px'
+                }}
+              >
+                Carrinho
+              </button>
               {/* Botão de logout. Chama a função 'logout' do contexto. */}
               <button
                 onClick={logout}
@@ -165,8 +183,9 @@ function App() {
           ) : activeSection === 'profile' ? (
             <UserProfile /> // Exibe o perfil do usuário
           ) : activeSection === 'orders' ? (
-            // Futuramente, aqui será o componente OrderList
-            <p style={{ textAlign: 'center', marginTop: '50px' }}>Tela de Pedidos (Em construção)</p>
+            <OrderList /> // Exibe a lista de pedidos
+          ) : activeSection === 'cart' ? (
+            <CartView /> // Exibe o componente do carrinho de compras
           ) : (
             // Fallback: se activeSection tiver um valor inesperado, mostra a lista de produtos
             <ProductList />

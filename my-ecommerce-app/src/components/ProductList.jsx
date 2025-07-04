@@ -1,11 +1,13 @@
 // src/components/ProductList.jsx
 import React, { useState, useEffect } from 'react';
 import { API_BASE_URL } from '../config/api';
+import { useCart } from '../context/CartContext'; // Importa o hook useCart
 
 function ProductList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { addToCart } = useCart(); // Pega a função addToCart do contexto
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -39,14 +41,12 @@ function ProductList() {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '20px auto', padding: '20px' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '30px', color: '#f0f0f0' }}>Nossos Produtos</h2> {/* Título principal dos produtos */}
+      <h2 style={{ textAlign: 'center', marginBottom: '30px', color: '#f0f0f0' }}>Nossos Produtos</h2>
       {products.length === 0 ? (
         <p style={{ textAlign: 'center', color: '#f0f0f0' }}>Nenhum produto disponível no momento.</p>
       ) : (
-        // Usa a classe "product-grid" para o container dos produtos
         <div className="product-grid">
           {products.map((product) => (
-            // Usa a classe "product-card" para cada produto individual
             <div key={product.id} className="product-card">
               <h3>{product.name}</h3>
               <p>{product.description || 'Sem descrição.'}</p>
@@ -57,7 +57,23 @@ function ProductList() {
               <p className="stock-category">
                 Categoria: {product.Category ? product.Category.name : 'N/A'}
               </p>
-              <button>
+              <button
+                // VERIFIQUE ESTA LINHA: O onClick deve chamar addToCart com o 'product'
+                onClick={() => {
+                  console.log('Adicionando ao carrinho:', product); // Adicione este log
+                  addToCart(product);
+                }}
+                style={{
+                  marginTop: '15px',
+                  padding: '10px 15px',
+                  backgroundColor: '#28a745',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                  fontSize: '1em'
+                }}
+              >
                 Adicionar ao Carrinho
               </button>
             </div>

@@ -1,6 +1,6 @@
 // src/components/Register.jsx
 import React, { useState } from 'react';
-import { API_BASE_URL } from '../config/api'; // Importa a URL base da API
+import { API_BASE_URL } from '../config/api';
 
 function Register({ onRegisterSuccess }) {
   const [name, setName] = useState('');
@@ -8,12 +8,12 @@ function Register({ onRegisterSuccess }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false); // Novo estado para sucesso
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    setSuccess(false); // Limpa o estado de sucesso
+    setSuccess(false);
     setLoading(true);
 
     try {
@@ -26,12 +26,10 @@ function Register({ onRegisterSuccess }) {
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess(true); // Define o sucesso
-        // Se houver uma função onRegisterSuccess passada, chame-a
+        setSuccess(true);
         if (onRegisterSuccess) {
           onRegisterSuccess();
         }
-        // Limpar formulário após sucesso
         setName('');
         setEmail('');
         setPassword('');
@@ -47,7 +45,8 @@ function Register({ onRegisterSuccess }) {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '20px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
+    // Usa a classe "card" definida em App.css
+    <div className="card">
       <h2>Registrar</h2>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <div>
@@ -58,7 +57,8 @@ function Register({ onRegisterSuccess }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+            // Remove o estilo inline de largura e padding
+            // style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
           />
         </div>
         <div>
@@ -69,7 +69,8 @@ function Register({ onRegisterSuccess }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+            // Remove o estilo inline de largura e padding
+            // style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
           />
         </div>
         <div>
@@ -80,14 +81,15 @@ function Register({ onRegisterSuccess }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+            // Remove o estilo inline de largura e padding
+            // style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
           />
         </div>
-        <button type="submit" disabled={loading} style={{ padding: '10px', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+        <button type="submit" disabled={loading} style={{ backgroundColor: '#28a745' }}>
           {loading ? 'Registrando...' : 'Registrar'}
         </button>
-        {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
-        {success && <p style={{ color: 'green', textAlign: 'center' }}>Registro bem-sucedido! Por favor, faça login.</p>}
+        {error && <p className="error-message">{error}</p>}
+        {success && <p className="success-message">Registro bem-sucedido! Por favor, faça login.</p>}
       </form>
     </div>
   );

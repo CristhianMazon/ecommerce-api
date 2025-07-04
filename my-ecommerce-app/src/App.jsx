@@ -5,6 +5,7 @@ import { useAuth } from './context/AuthContext'; // Importa o hook useAuth do no
 import Login from './components/Login'; // Importa o componente Login
 import Register from './components/Register'; // Importa o componente Register
 import ProductList from './components/ProductList'; // Importa o componente ProductList
+import UserProfile from './components/UserProfile'; // Importa o componente UserProfile
 
 function App() {
   // Desestrutura o token, a função logout e o estado de carregamento da autenticação do hook useAuth.
@@ -16,6 +17,10 @@ function App() {
   // Estado local para controlar qual formulário de autenticação deve ser exibido.
   // Se 'true', mostra o formulário de Login. Se 'false', mostra o formulário de Registro.
   const [showLogin, setShowLogin] = useState(true);
+
+  // Novo estado para controlar a seção ativa da aplicação para usuários logados.
+  // Pode ser 'products', 'profile', 'orders'. Inicia mostrando 'products'.
+  const [activeSection, setActiveSection] = useState('products');
 
   // Se o estado de carregamento da autenticação for verdadeiro, exibe uma mensagem de carregamento.
   // Isso é útil para evitar que a UI pisque enquanto o AuthContext verifica o token no localStorage
@@ -76,12 +81,13 @@ function App() {
             </>
           ) : ( // Se houver um token (usuário logado)
             <>
-              {/* Botões de navegação para usuários logados.
-                  Por enquanto, são apenas botões estáticos. No futuro, podem ser links ou mudar de tela. */}
+              {/* Botões de navegação para usuários logados */}
               <button
+                onClick={() => setActiveSection('profile')} // Define a seção ativa como 'profile'
+                // Estilo condicional para destacar o botão ativo
                 style={{
                   padding: '10px 20px',
-                  backgroundColor: '#6c757d',
+                  backgroundColor: activeSection === 'profile' ? '#5a6268' : '#6c757d',
                   color: 'white',
                   border: 'none',
                   borderRadius: '5px',
@@ -92,9 +98,11 @@ function App() {
                 Meu Perfil
               </button>
               <button
+                onClick={() => setActiveSection('products')} // Define a seção ativa como 'products'
+                // Estilo condicional para destacar o botão ativo
                 style={{
                   padding: '10px 20px',
-                  backgroundColor: '#6c757d',
+                  backgroundColor: activeSection === 'products' ? '#5a6268' : '#6c757d',
                   color: 'white',
                   border: 'none',
                   borderRadius: '5px',
@@ -105,9 +113,11 @@ function App() {
                 Produtos
               </button>
               <button
+                onClick={() => setActiveSection('orders')} // Define a seção ativa como 'orders'
+                // Estilo condicional para destacar o botão ativo
                 style={{
                   padding: '10px 20px',
-                  backgroundColor: '#6c757d',
+                  backgroundColor: activeSection === 'orders' ? '#5a6268' : '#6c757d',
                   color: 'white',
                   border: 'none',
                   borderRadius: '5px',
@@ -136,7 +146,8 @@ function App() {
           )}
         </nav>
       </header>
-      <main>
+      {/* A tag <main> ocupa a largura total para que seu conteúdo possa ser centralizado */}
+      <main style={{ width: '100%' }}>
         {!token ? ( // Se o usuário NÃO estiver logado
           // Renderiza condicionalmente o componente Login ou Register
           showLogin ? (
@@ -148,8 +159,18 @@ function App() {
             <Register onRegisterSuccess={() => setShowLogin(true)} />
           )
         ) : ( // Se o usuário ESTIVER logado
-          // Exibe o componente ProductList, que buscará e mostrará os produtos da API.
-          <ProductList />
+          // Renderiza o componente correspondente à seção ativa
+          activeSection === 'products' ? (
+            <ProductList /> // Exibe a lista de produtos
+          ) : activeSection === 'profile' ? (
+            <UserProfile /> // Exibe o perfil do usuário
+          ) : activeSection === 'orders' ? (
+            // Futuramente, aqui será o componente OrderList
+            <p style={{ textAlign: 'center', marginTop: '50px' }}>Tela de Pedidos (Em construção)</p>
+          ) : (
+            // Fallback: se activeSection tiver um valor inesperado, mostra a lista de produtos
+            <ProductList />
+          )
         )}
       </main>
     </div>

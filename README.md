@@ -1,24 +1,29 @@
-# 💻 API Backend — Trabalho Acadêmico
 
-Este repositório contém o projeto final da disciplina de **Desenvolvimento Backend**, focado na construção de uma **API RESTful robusta, modular e segura**.  
-A aplicação utiliza a stack **Node.js com JavaScript**, integrada a um banco de dados relacional **MySQL**, com mapeamento de dados feito por meio do **Sequelize**.
+# 💻 API Backend e Frontend — Trabalho Acadêmico
+
+Este repositório contém o projeto final da disciplina de **Desenvolvimento Backend**, focado na construção de uma **API RESTful robusta, modular e segura**, e um **Frontend** para consumir essa API.
+
+A aplicação backend utiliza a stack **Node.js com JavaScript**, integrada a um banco de dados relacional **MySQL**, com mapeamento de dados feito por meio do **Sequelize**. O frontend é desenvolvido com **React.js**.
 
 ---
 
 ## 📌 Objetivo
 
-Este projeto demonstra, na prática, o uso do padrão **MVC** com foco em:
+Este projeto demonstra, na prática, o uso do padrão **MVC** no backend e uma aplicação **React** no frontend, com foco em:
 
-- 🔐 Autenticação com JWT e criptografia de senhas (bcryptjs)  
-- 📦 Gestão completa de entidades: **Usuários, Produtos, Categorias e Pedidos**  
-- 🔄 Relacionamentos complexos entre tabelas (1:N, N:N)  
-- 🧾 Transações de banco de dados (ex: controle de estoque)  
-- 📘 Documentação interativa da API com **Swagger**  
-- 🧱 Código modular, seguro e de fácil manutenção
+- 🔐 **Autenticação com JWT** e criptografia de senhas (bcryptjs)  
+- 📦 **Gestão completa de entidades**: Usuários, Produtos, Categorias e Pedidos  
+- 🔄 **Relacionamentos complexos** entre tabelas (1:N, N:N)  
+- 🧾 **Transações de banco de dados** (ex: controle de estoque ao criar pedidos)  
+- 📘 **Documentação interativa da API com Swagger**  
+- 🧱 **Código modular**, seguro e de fácil manutenção  
+- ⚛️ **Frontend em React** para consumir a API, gerenciando autenticação (Context API) e carrinho de compras  
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
+
+### Backend
 
 - **Node.js** → Ambiente de execução JavaScript no servidor  
 - **Express.js** → Framework web para APIs RESTful  
@@ -28,7 +33,16 @@ Este projeto demonstra, na prática, o uso do padrão **MVC** com foco em:
 - **jsonwebtoken** → Autenticação via JWT  
 - **dotenv** → Gerenciamento de variáveis de ambiente  
 - **Swagger** → Documentação interativa da API  
-- **Nodemon** → Reinício automático em desenvolvimento
+- **Nodemon** → Reinício automático em desenvolvimento  
+- **CORS** → Gerenciamento de Cross-Origin Resource Sharing  
+
+### Frontend (React)
+
+- **React.js** → Biblioteca JavaScript para construir interfaces de usuário  
+- **Vite** → Ferramenta de build frontend moderna e rápida  
+- **Context API** → Para gerenciamento de estado global (autenticação e carrinho)  
+- **ESLint** → Para padronização e garantia de qualidade de código  
+- **CSS puro** → Para estilização dos componentes  
 
 ---
 
@@ -36,38 +50,53 @@ Este projeto demonstra, na prática, o uso do padrão **MVC** com foco em:
 
 ```text
 📦 ecommerce-api
-├── 📁 src
-│   ├── 📁 config/            → Conexão com banco de dados
+├── 📁 src/                     # Código fonte do Backend
+│   ├── 📁 config/              → Conexão com banco de dados
 │   │   └── database.js
-│   ├── 📁 controllers/       → Lógica dos endpoints
+│   ├── 📁 controllers/         → Lógica dos endpoints
 │   │   ├── authController.js
 │   │   ├── categoryController.js
 │   │   ├── orderController.js
 │   │   ├── productController.js
 │   │   └── userController.js
-│   ├── 📁 models/            → Definição das entidades e relacionamentos
+│   ├── 📁 models/              → Definição das entidades e relacionamentos
 │   │   ├── Category.js
 │   │   ├── Order.js
 │   │   ├── OrderProduct.js
 │   │   ├── Product.js
 │   │   └── User.js
-│   ├── 📁 middlewares/       → Autenticação e validações
+│   ├── 📁 middlewares/         → Autenticação e validações
 │   │   └── auth.js
-│   ├── 📁 routes/            → Endpoints organizados por entidade
+│   ├── 📁 routes/              → Endpoints organizados por entidade
 │   │   ├── authRoutes.js
 │   │   ├── categoryRoutes.js
 │   │   ├── orderRoutes.js
 │   │   ├── productRoutes.js
 │   │   └── userRoutes.js
-│   ├── 📁 docs/              → Configuração Swagger
+│   ├── 📁 docs/                → Configuração Swagger
 │   │   └── swagger.js
-│   ├── 📁 utils/             → Scripts auxiliares
+│   ├── 📁 utils/               → Scripts auxiliares
 │   │   └── populate.js
-│   ├── app.js                → Configuração principal do Express
-│   └── server.js             → Inicialização da aplicação
-├── .env.example              → Exemplo de variáveis de ambiente
-├── package.json              → Dependências e scripts
-└── package-lock.json         → Controle de versões
+│   ├── app.js                  → Configuração principal do Express
+│   └── server.js               → Inicialização da aplicação
+├── 📁 my-ecommerce-app/        # Código fonte do Frontend (Aplicação React)
+│   ├── 📁 public/              
+│   ├── 📁 src/                 
+│   │   ├── 📁 components/      → Componentes reutilizáveis (Login, Register, ProductList, CartView, UserProfile, OrderList, Modal, EditProfileForm)
+│   │   ├── 📁 context/         → Contextos de React (AuthContext, CartContext)
+│   │   ├── 📁 config/          → Configurações do frontend (ex: URL da API)
+│   │   ├── App.css             → Estilos CSS globais da aplicação
+│   │   ├── App.jsx             → Componente principal da aplicação
+│   │   ├── index.css           → Estilos CSS iniciais
+│   │   └── main.jsx            → Ponto de entrada do React
+│   ├── .eslintrc.cjs           → Configuração ESLint
+│   ├── index.html              → Arquivo HTML principal
+│   ├── package.json            → Dependências e scripts do Frontend
+│   ├── package-lock.json       → Controle de versões do Frontend
+│   └── vite.config.js          → Configuração do Vite
+├── .env.example                → Exemplo de variáveis de ambiente do Backend
+├── package.json                → Dependências e scripts do Backend
+└── package-lock.json           → Controle de versões do Backend
 ```
 
 ---
@@ -77,29 +106,27 @@ Este projeto demonstra, na prática, o uso do padrão **MVC** com foco em:
 ### ✅ Pré-requisitos
 
 - Node.js (v14 ou superior)  
-- MySQL Server (recomenda-se o XAMPP)  
-- MySQL Workbench (opcional)
+- MySQL Server (recomenda-se o XAMPP ou Docker)  
+- MySQL Workbench (opcional, para gerenciar o banco de dados)  
 
----
+### 🧰 Instalação e Configuração do Backend
 
-### 🧰 Instalação e Configuração
-
-1. **Clone o repositório:**
+1. Clone o repositório:
 
 ```bash
 git clone https://github.com/CristhianMazon/ecommerce-api.git
 cd ecommerce-api
 ```
 
-2. **Instale as dependências:**
+2. Instale as dependências do Backend:
 
 ```bash
 npm install
 ```
 
-3. **Configure o ambiente:**
+3. Configure o ambiente do Backend:
 
-Crie o arquivo `.env` na raiz com base no exemplo abaixo:
+Crie um arquivo `.env` na raiz do projeto (`ecommerce-api/`) com base no `.env.example`:
 
 ```env
 PORT=3000
@@ -110,71 +137,94 @@ DB_PASSWORD=
 DB_HOST=localhost
 ```
 
-> 🔒 Altere `DB_USER` e `DB_PASSWORD` conforme suas credenciais MySQL.
+> 🔒 Altere `DB_USER` e `DB_PASSWORD` conforme suas credenciais MySQL. Se estiver usando XAMPP, `DB_USER` geralmente é `root` e `DB_PASSWORD` é vazio por padrão.
 
-4. **Inicie o MySQL:**
+4. Inicie o MySQL (via XAMPP ou similar).
 
-- Abra o XAMPP  
-- Clique em “Start” no módulo MySQL
+5. Crie o banco de dados (ex: `api_ecommerce_db`) manualmente com o nome do `.env`.
 
-5. **Crie o banco de dados:**
-
-- Acesse o MySQL Workbench  
-- Crie um schema com o nome definido no `.env` (ex: `api_ecommerce_db`)
-
-6. **Popule o banco com dados iniciais:**
+6. Popule o banco com dados iniciais:
 
 ```bash
 npm run populate
 ```
 
-> Mensagem esperada: `Banco populado com sucesso!`
-
-7. **Execute a aplicação:**
+7. Execute a aplicação Backend:
 
 ```bash
 npm run dev
 ```
 
----
-
-## 🧪 Testando a API
-
-### 📘 Documentação Interativa
-
-Acesse via navegador:  
-[http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+> O servidor estará em `http://localhost:3000`.
 
 ---
+
+### ⚛️ Instalação e Configuração do Frontend
+
+1. Navegue até o diretório do frontend:
+
+```bash
+cd my-ecommerce-app
+```
+
+2. Instale as dependências:
+
+```bash
+npm install
+```
+
+3. Verifique a URL da API:
+
+```js
+// src/config/api.js
+const API_BASE_URL = 'http://localhost:3000/api';
+export { API_BASE_URL };
+```
+
+4. Execute a aplicação:
+
+```bash
+npm run dev
+```
+
+> A aplicação estará em `http://localhost:5173`.
+
+---
+
+## 🧪 Testando a Aplicação
+
+### 📘 Swagger
+
+```
+http://localhost:3000/api-docs
+```
 
 ### 🔐 Login de Teste
 
-Use as credenciais abaixo no endpoint `/api/auth/login`:
+- **Email:** cris@example.com  
+- **Senha:** 123456  
 
-- **Email:** `cris@example.com`  
-- **Senha:** `123456`
+### Carrinho e Pedidos
 
-Copie o token de acesso retornado e clique em "Authorize" na interface Swagger para inserir:
-
-```
-Bearer SEU_TOKEN_AQUI
-```
-
-Ou utilize no Postman:
-
-```
-Authorization: Bearer SEU_TOKEN_AQUI
-```
+- Adicionar produtos ao carrinho  
+- Finalizar pedido (estoque atualizado)  
+- Ver ou cancelar pedidos (reposiciona estoque)  
 
 ---
 
-## 📚 Observações
+## 📚 Observações Adicionais
 
-- 🔐 JWT e senhas protegidas com bcryptjs  
-- 🔁 Pedidos utilizam transações para garantir controle de estoque  
-- 🔗 Relacionamentos bem definidos com integridade referencial no Sequelize  
-- 📘 Swagger cobre todos os endpoints da API  
-- 🧹 Código modular e organizado segundo o padrão MVC
+### Backend
+
+- JWT + senhas criptografadas com bcryptjs  
+- Transações garantem integridade de pedidos  
+- Relacionamentos Sequelize bem definidos  
+- CORS liberado para dev (restrinja em prod)  
+
+### Frontend
+
+- AuthContext e CartContext para controle de estado  
+- Atualização de perfil e uso de modais reutilizáveis  
 
 ---
 

@@ -32,7 +32,7 @@ function App() {
     return (
       <div className="App">
         <header>
-          <h1>Minha Loja Online</h1>
+          <h1>Mazon Express</h1>
         </header>
         <main>
           <p style={{ textAlign: 'center', marginTop: '50px' }}>Verificando autenticação...</p>
@@ -44,7 +44,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>Minha Loja Online</h1>
+        <h1>Mazon Express</h1>
         {/* Barra de navegação com botões de autenticação ou navegação */}
         <nav style={{ display: 'flex', justifyContent: 'center', gap: '10px', padding: '10px', backgroundColor: '#f8f9fa', borderBottom: '1px solid #e9ecef' }}>
           {!token ? ( // Se não houver um token (usuário não logado)
